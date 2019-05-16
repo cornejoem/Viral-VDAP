@@ -18,13 +18,12 @@ We have constructed a pipeline using freely available tools for quality control,
 - FASTQ files of your NGS sequencing results
 - FASTA files of reference sequence. If you don't have your own reference genome, read on. Assuming you know the species you sampled, 1) Go to https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/find-data/virus and select “Search by Virus" 2) Begin typing the name of your virus. You can use taxonomic groups (e.g., Human gammaherpesvirus...) or common names (e.g., Kaposi's sarcoma-associated herpesvirus... don’t worry, it’s an autofill, you don’t have to type the whole thing). 3) On the filter panel on the left, click “Nucleotide Sequence Type,” then check “RefSeq.” 4) Select the sequence you want, then download the FASTA file.
 
-
-- 
-- 
-
 - **Note:** On test data, de novo assembly produced a more complete assembly that better reproduced the corresponding published genome sequence than reference-based alignment. For the curious, reference-based alignment can be carried out as follows (more details below): Alignment to reference sequence (Bowtie2)-> Sequence deduplication (Samtools) -> calling variants and making consensus sequence (Samtools))
 
 ##  Viral VDAP Workflow
+
+(insert workflow chart)
+
 **Step 1: Quality filtering, trimming, and minimum length filtering** 
   
 
@@ -113,24 +112,3 @@ As expected, the de novo assembly does not resolve the repeat regions.
 - Rashmi Naidu
 
 Allissa Dillman - hackathon organizer
-
-
-
-### Docker
-
-The Docker image contains <this software> as well as a webserver and FTP server in case you want to deploy the FTP server. It does also contain a web server for testing the <this software> main website (but should only be used for debug purposes).
-
-1. `docker pull ncbihackathons/<this software>` command to pull the image from the DockerHub
-2. `docker run ncbihackathons/<this software>` Run the docker image from the master shell script
-3. Edit the configuration files as below
-
-### DockerFile
-
-<this software> comes with a Dockerfile which can be used to build the Docker image.
-
-  1. `git clone https://github.com/NCBI-Hackathons/<this software>.git`
-  2. `cd server`
-  3. `docker build --rm -t <this software>/<this software> .`
-  4. `docker run -t -i <this software>/<this software>`
-
-
