@@ -24,51 +24,43 @@ We have constructed a pipeline using freely available tools for quality control,
 
 (insert workflow chart)
 
-**Step 1: Quality filtering, trimming, and minimum length filtering** 
+**Step 1: Quality filtering, trimming, and minimum length filtering**<br/> 
   
 
-_Trimmomatic v.0.39_\
-Input:\
+_Trimmomatic v.0.39_<br/>
+Input:<br/>
 Parameters: `ILLUMINACLIP:adapters.fa:2:30:10 LEADING:3 TRAILING:3 AVGQUAL:30 MINLEN:50`
-- This line in `1.trim.sh` specifies that reads are to have a minimum average quality score of 30, low quality (<3) leading and trailing bases trimmed, and a minimum length after trimming of 50. All other settings as default. 
-Output:\
-
-Citation:\
-- Bolger, A. M., Lohse, M., & Usadel, B. (2014). Trimmomatic: A flexible trimmer for Illumina Sequence Data. Bioinformatics, btu170  
+- This line in `1.trim.sh` specifies that reads are to have a minimum average quality score of 30, low quality (<3) leading and trailing bases trimmed, and a minimum length after trimming of 50. All other settings as default.<br/>
+Output:<br/>
+Citation: Bolger, A. M., Lohse, M., & Usadel, B. (2014). Trimmomatic: A flexible trimmer for Illumina Sequence Data. Bioinformatics, btu170 <br/> 
 
 **Step 2: Assembly**  
 Step 2.1: De novo sequence assembly (SPAdes)
 Step 2.2: Align scaffolds to reference and condense aligned scaffolds into a consensus/draft genome (Medusa)
           
-_SPAdes v3.13.0_\
-Input:\
+_SPAdes v3.13.0_<br/>
+Input:<br/>
 Parameters: `-k 21,33,55,77 -t 10 --only-assembler --careful`
-- The line listed in `sbatch.sh` specifies that SPAdes should run in assembly module only (--only-assembler) and applies --careful to try to reduce the number of mismatches and short indels. The k parameter refers to the k-mer sizes. We used a range of sizes from 21 to 77. The t parameter refers to the number of threads to run the software. 
-Output:\
+- The line listed in `sbatch.sh` specifies that SPAdes should run in assembly module only (--only-assembler) and applies --careful to try to reduce the number of mismatches and short indels. The k parameter refers to the k-mer sizes. We used a range of sizes from 21 to 77. The t parameter refers to the number of threads to run the software.<br/>
+Output:<br/>
+Citation: Bankevich A., Nurk S., Antipov D., Gurevich A., Dvorkin M., Kulikov A. S., Lesin V., Nikolenko S., Pham S., Prjibelski A., Pyshkin A., Sirotkin A., Vyahhi N., Tesler G., Alekseyev M. A., Pevzner P. A. SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing.    Journal of Computational Biology, 2012
 
-Citation:\
--  Bankevich A., Nurk S., Antipov D., Gurevich A., Dvorkin M., Kulikov A. S., Lesin V., Nikolenko S., Pham S., Prjibelski A., Pyshkin A., Sirotkin A., Vyahhi N., Tesler G., Alekseyev M. A., Pevzner P. A. SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing.    Journal of Computational Biology, 2012
+_Medusa v1.6_<br/>
+Input:<br/>
+Parameters: `scaffold.sh` (`All default settings`)<br/>
+- Downstream steps use the largest scaffold produced from alignment.<br/>
+Output:<br/>
 
-_Medusa v1.6_\
-Input:
-Parameters: `scaffold.sh` (`All default settings`)
-Downstream steps use the largest scaffold produced from alignment.
-Output:\
-
-Citation:\
--  xxx
+Citation: xxx
 
 **Step 3: Variant discovery (compare assembly to reference genome to extract SNPs _[testing in progress]_** 
-_Parsnp v1.2_\
+_Parsnp v1.2_<br/>
 
-Input:\
-Parameters: `All default settings`\
-Output:\
+Input:<br/>
+Parameters: `All default settings`<br/>
+Output:<br/>
 
-Citation:\
-- Treangen TJ*, Ondov BD*, Koren S, Phillippy AM:
-     Rapid Core-Genome Alignment and Visualization for Thousands of Microbial Genomes.
-     bioRxiv (2014). doi: http://dx.doi.org/10.1101/007351
+Citation: Treangen TJ*, Ondov BD*, Koren S, Phillippy AM: Rapid Core-Genome Alignment and Visualization for Thousands of Microbial Genomes. bioRxiv (2014). doi: http://dx.doi.org/10.1101/007351
 
 ## Installation:
 ### Docker
@@ -104,7 +96,7 @@ As expected, the de novo assembly does not resolve the repeat regions.
 
 ## Team 
 
-- Elena Maria Cornejo Castro
+- Elena M. Cornejo Castro
 - Yunfan Fan
 - Eneida Hatcher
 - Sara Jones  
